@@ -318,7 +318,7 @@ class Drawer: # TODO: wall, switches, goals, hives, HUD, spawn cost, explosions,
         self.draw_spawning(ps)
         self.draw_mines(ps)
         self.draw_balls(ps)
-        #self.maybe_draw_mine_bitmap(0, ps)
+        #self.maybe_draw_mine_bitmap(0, ps) # For debugging
         self.draw_notice(ps, is_paused)
         if self.fps_display is not None:
             self.fps_display.draw()

@@ -32,7 +32,7 @@ def get_simple_world():
     )
 
 def get_mine_input(world, window):
-    '''Select who to play against here:''' 
+    '''Select where mines spawn here:''' 
     return RandomMineInput()
     # return ClassicMineAI()
     # return UniformMineInput()
@@ -59,6 +59,8 @@ def play():
     mine_input = get_mine_input(world, window)
 
     ball_input = BallPlayer(window)
+    #ball_input = ClassicBallAI() # TODO
+    
     sim = Simulator(
         world, window, do_draw=True, use_simple_physics=False,
         fps=60, dt_eps=0.005, max_dt=0.25
