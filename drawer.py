@@ -283,6 +283,24 @@ class Drawer: # TODO: wall, switches, goals, hives, HUD, spawn cost, explosions,
         percent = int(100 * spawner.get_add_power_level() / spawner.full_power_level)
         self.set_notice_text(text + '  ' + str(percent))
         self.notice.draw()
+    
+    def maybe_save_minemap(self, ball_index, ps, minemap):
+        balls = ps.get_balls()
+        poss = balls.get_poss()
+        if ball_index >= len(poss):
+            return
+        
+        ball_x, ball_y = poss[ball_index][0], poss[ball_index][1]
+        wall = ps.get_wall()
+        max_x, max_y = wall.width, wall.height
+        rel_x, rel_y = ball_x/max_x, ball_y/max_y
+        
+        vel = balls.get_vels()[ball_index]
+        
+        elapsed = ps.get_elapsed_time()
+        contents = f"{elapsed}\n{vel[0]}\n{vel[1]}\n{rel_x}\n{rel_y}\n" + minemap.to_str(false_char='.', true_char='@')
+        with open(f"./minemaps/{elapsed}.txt", "w") as f:
+            f.write(contents)
 
 # Public:
 
@@ -319,8 +337,8 @@ class Drawer: # TODO: wall, switches, goals, hives, HUD, spawn cost, explosions,
         
         training = True
         if training:
-            bitmap = self.maybe_draw_mine_bitmap(0, ps)
-            elapsed = ps.get_elapsed_time()
+            minemap = self.maybe_draw_mine_bitmap(0, ps)
+            self.maybe_save_minemap(0, ps, minemap)
         else:
             self.draw_mines()
         

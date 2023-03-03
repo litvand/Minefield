@@ -25,7 +25,9 @@ def get_bitmap_of_circles_on_AABB(size_in_bits, center, step, poss, rad):
 
                 bit_pos = vec_add(bit_center, (dx, dy))
                 if not bitmap.are_indices_in_bounds(bit_pos):
-                    continue # `bit_pos` isn't in bitmap.
+                    # `bit_pos` isn't in bitmap, so ignore this mine.
+                    # In other words, this mine isn't visible on the bitmap.
+                    continue
 
                 corner_a, corner_b = bitmap.get_bit_corners(bit_pos)
                 is_touching = is_circle_touching_AABB(bit_center, rad_in_bits,
