@@ -120,8 +120,8 @@ class Simulator:
         self.last_toggle_time = None
 
     def print_results(self):
-        print('del num:\t' + str(self.ps.get_mines().get_del_num()))
-        print('time:\t\t' + str(round(self.ps.get_elapsed_time(), 3)))
+        print('Destroyed mines:\t' + str(self.ps.get_mines().get_del_num()))
+        print('Survived seconds:\t' + str(round(self.ps.get_elapsed_time(), 3)))
 
     def run(self, mine_input, ball_inputs):
         if self.drawer is None:

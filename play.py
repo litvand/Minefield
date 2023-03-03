@@ -22,26 +22,18 @@ class InputCycle:
         pass
 
 def get_simple_world():
-
-    # TODO: Eliminate the need for this sort of comment:
-
-    #initial_wall_bitmap,
-    #mine_max_speed, mine_rad, are_mines_magnetic,
-    #ball_max_speed, ball_rad, initial_ball_poss,
-    #width_in_tiles, height_in_tiles, tile_width, tile_height,
-    #power_fill_speed, full_power_level, explosive_power_level,
-    #min_spawn_time, max_spawn_time, min_ball_added_mine_dist
-
-    return World([0],
-                 70.0, 5.0, False,
-                 130.0, 5.0, ((150.0, 150.0),),
-                 1, 1, 600.0, 600.0,
-                 100.0, 100.0, None,
-                 0.15, 0.25, 100.0)
+    return World(
+        initial_wall_bitmap=[0],
+        mine_max_speed=60.0, mine_rad=5.0, are_mines_magnetic=False,
+        ball_max_speed=130.0, ball_rad=5.0, initial_ball_poss=((150.0, 150.0),),
+        width_in_tiles=1, height_in_tiles=1, tile_width=600.0, tile_height=600.0,
+        power_fill_speed=100.0, full_power_level=100.0, explosive_power_level=None,
+        min_spawn_time=0.15, max_spawn_time=0.25, min_ball_added_mine_dist=50.0
+    )
 
 def get_mine_input(world, window):
     '''Select who to play against here:''' 
-    # return RandomMineInput()
+    return RandomMineInput()
     # return ClassicMineAI()
     # return UniformMineInput()
     # return MinePlayer(window, 0.2)
@@ -67,7 +59,10 @@ def play():
     mine_input = get_mine_input(world, window)
 
     ball_input = BallPlayer(window)
-    sim = Simulator(world, window, True, False, 60, 1.0/200.0, 1.0/4.0)
+    sim = Simulator(
+        world, window, do_draw=True, use_simple_physics=False,
+        fps=60, dt_eps=0.005, max_dt=0.25
+    )
     sim.run(mine_input, (ball_input,))
 
 play()
