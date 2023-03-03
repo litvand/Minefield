@@ -5,9 +5,8 @@ class Window:   # Could be implemented using a glfwWindow, for example.
 
     def try_make_window_from_template(self, width, height, template): # static function
 
-        platform = pg.window.get_platform() # Pyglet singleton
-        display  = platform.get_default_display()
-        screen   =  display.get_default_screen()
+        display = pg.canvas.get_display() 
+        screen  =  display.get_default_screen()
 
         config = None
         try:
@@ -70,3 +69,4 @@ class Window:   # Could be implemented using a glfwWindow, for example.
 
     def is_pressed(self, key):
         return self.key_state_handler[key]
+

@@ -40,9 +40,10 @@ def get_simple_world():
                  0.15, 0.25, 100.0)
 
 def get_mine_input(world, window):
+    '''Select who to play against here:''' 
     # return RandomMineInput()
     # return ClassicMineAI()
-    return UniformMineInput()
+    # return UniformMineInput()
     # return MinePlayer(window, 0.2)
 
     # spawn_poss = ((50.0, 50.0), (50.0, 550.0), (550.0, 550.0), (550.0, 50.0))
@@ -64,6 +65,11 @@ def play():
     world = get_simple_world()
     window = Window(int(world.width), int(world.height))
     mine_input = get_mine_input(world, window)
+
     ball_input = BallPlayer(window)
     sim = Simulator(world, window, True, False, 60, 1.0/200.0, 1.0/4.0)
     sim.run(mine_input, (ball_input,))
+
+play()
+
+

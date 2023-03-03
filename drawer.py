@@ -292,8 +292,8 @@ class Drawer: # TODO: wall, switches, goals, hives, HUD, spawn cost, explosions,
 
     def __init__(self, window, draw_fps = True):
         
-        self.show_force_field_min  = True
-        self.show_force_field_max  = True
+        self.show_force_field_min  = False
+        self.show_force_field_max  = False
         self.show_mine_bitmap_size = False
         
         self.window = window
@@ -307,7 +307,7 @@ class Drawer: # TODO: wall, switches, goals, hives, HUD, spawn cost, explosions,
         self.bitmap_drawer = BitmapDrawer()
         self.mask = Mask()
         
-        self.fps_display = pg.clock.ClockDisplay() if draw_fps else None
+        self.fps_display = None # TODO: pg.clock.ClockDisplay() if draw_fps else None
         self.notice = pg.text.Label(
             '', font_name = 'Courier New', font_size = 12,
             x = 5.0, y = window.height - 5.0, anchor_x = 'left', anchor_y = 'top'
@@ -316,9 +316,10 @@ class Drawer: # TODO: wall, switches, goals, hives, HUD, spawn cost, explosions,
     def draw(self, ps, is_paused):
         self.window.clear()
         self.draw_spawning(ps)
-        #self.draw_mines(ps)
+        self.draw_mines(ps)
         self.draw_balls(ps)
-        self.maybe_draw_mine_bitmap(0, ps)
+        #self.maybe_draw_mine_bitmap(0, ps)
         self.draw_notice(ps, is_paused)
         if self.fps_display is not None:
             self.fps_display.draw()
+
