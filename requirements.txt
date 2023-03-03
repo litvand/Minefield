@@ -1,3 +1,3 @@
-python_version>=3.0
-pyglet==1.5.27
+Minefield==0.1; python_version>=3.0
+Minefield; pyglet==1.5.27
 

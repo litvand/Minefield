@@ -320,7 +320,7 @@ class Drawer: # TODO: wall, switches, goals, hives, HUD, spawn cost, explosions,
         training = True
         if training:
             bitmap = self.maybe_draw_mine_bitmap(0, ps)
-            
+            elapsed = ps.get_elapsed_time()
         else:
             self.draw_mines()
         

@@ -155,7 +155,7 @@ class PhysicsState:
         collisions = self.mines.find_ball_collisions(ball_poss, self.balls.rad)
         self.balls.update_collided(collisions)
         if any(collisions):
-            print('time:\t' + str(self.get_elapsed_time())) # For debugging
+            print('Last collision time:\t' + str(self.get_elapsed_time())) # For debugging
 
         # Finish step.
         self.elapsed_time.add(dt)

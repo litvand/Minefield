@@ -63,7 +63,7 @@ def play():
     
     sim = Simulator(
         world, window, do_draw=True, use_simple_physics=False,
-        fps=60, dt_eps=0.005, max_dt=0.25
+        fps=10, dt_eps=0.005, max_dt=0.25
     )
     sim.run(mine_input, (ball_input,))
 
