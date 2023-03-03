@@ -250,7 +250,6 @@ class Drawer: # TODO: wall, switches, goals, hives, HUD, spawn cost, explosions,
         self.bitmap_drawer.draw()
 
     def draw_mask(self, corner, size, ps):
-
         wall = ps.get_wall()
         max_size = (wall.width, wall.height)
         
@@ -259,14 +258,14 @@ class Drawer: # TODO: wall, switches, goals, hives, HUD, spawn cost, explosions,
         self.mask.draw()
     
     def maybe_draw_mine_bitmap(self, ball_index, ps):
-
         ball_poss = ps.get_balls().get_poss()
         if ball_index >= len(ball_poss):
             return
 
         bitmap = get_mine_bitmap(ball_index, ps)
         self.draw_mine_bitmap(bitmap)
-        #self.draw_mask(bitmap.corner, bitmap.size, ps)
+        self.draw_mask(bitmap.corner, bitmap.size, ps)
+        return bitmap
 
     def set_notice_text(self, text):
         if self.notice.text != text:
@@ -290,7 +289,7 @@ class Drawer: # TODO: wall, switches, goals, hives, HUD, spawn cost, explosions,
     def reset(self):
         self.set_notice_text('')
 
-    def __init__(self, window, draw_fps = True):
+    def __init__(self, window, draw_fps=True):
         
         self.show_force_field_min  = False
         self.show_force_field_max  = False
@@ -316,9 +315,15 @@ class Drawer: # TODO: wall, switches, goals, hives, HUD, spawn cost, explosions,
     def draw(self, ps, is_paused):
         self.window.clear()
         self.draw_spawning(ps)
-        self.draw_mines(ps)
         self.draw_balls(ps)
-        #self.maybe_draw_mine_bitmap(0, ps) # For debugging
+        
+        training = True
+        if training:
+            bitmap = self.maybe_draw_mine_bitmap(0, ps)
+            
+        else:
+            self.draw_mines()
+        
         self.draw_notice(ps, is_paused)
         if self.fps_display is not None:
             self.fps_display.draw()
